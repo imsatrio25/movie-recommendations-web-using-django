@@ -1,0 +1,17 @@
+<!-- recommendations_fragment.html -->
+<div class="recommendations-grid">
+    {% if error_message %}
+        <p>{{ error_message }}</p>
+    {% else %}
+        {% for recommendation in recommendations %}
+            <div class="recommendation-item">
+                {% if recommendation.poster_path %}
+                    <img src="{{ recommendation.poster_path }}" alt="{{ recommendation.title }} poster">
+                {% else %}
+                    <p>No poster available</p>
+                {% endif %}
+                <h2>{{ recommendation.title }}</h2>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>

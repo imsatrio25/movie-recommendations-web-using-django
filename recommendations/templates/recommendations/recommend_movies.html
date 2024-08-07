@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendations</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            $("#movie-title").autocomplete({
+                source: "{% url 'autocomplete' %}",
+                minLength: 2
+            });
+
+            $("form").on("submit", function(event) {
+                event.preventDefault();
+                var form = $(this);
+
+                $.ajax({
+                    type: form.attr('method'),
+                    url: form.attr('action'),
+                    data: form.serialize(),
+                    beforeSend: function() {
+                        console.log("Sending request...");
+                    },
+                    success: function(response) {
+                        console.log("Success:", response);
+
+                        // Update the recommendations section with the response
+                        $("#recommendations-section").html(response);
+
+                        // Scroll to the recommendations section
+                        $('html, body').animate({
+                            scrollTop: $("#recommendations-section").offset().top
+                        }, 1000);
+                    },
+                    error: function(response) {
+                        console.log("Error:", response);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <section id="search-section" class="search-section center">
+        <div class="container-input">
+            <h1>Movie Recommendations</h1>
+            <form method="post" action="{% url 'recommend_movies' %}">
+                {% csrf_token %}
+                <input type="text" id="movie-title" name="title" placeholder="Insert Movie Title" required>
+                <button type="submit">Get Recommendations</button>
+            </form>
+            {% if error_message %}
+                <p>{{ error_message }}</p>
+            {% endif %}
+        </div>
+    </section>
+
+    <section id="recommendations-section" class="recommendations-section">
+        <!-- Recommendations will be loaded here -->
+    </section>
+</body>
+</html>

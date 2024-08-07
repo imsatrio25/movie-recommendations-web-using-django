@@ -1,0 +1,129 @@
+/* Add this to your css/style.css file */
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    font-family: Arial, sans-serif;
+}
+
+section {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+h1 {
+    color: #F7F9F9;
+}
+
+h2 {
+    color: #C7CEDB;
+}
+
+.search-section {
+    background-color: #1C7293;
+    text-align: center;
+}
+
+.recommendations-section {
+    background-color: #0C1B33;
+}
+
+.container-input {
+    max-width: 600px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-input form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.container-input input, .container-input button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.container-input button {
+    background-color: #0C1B33;
+    color: #F7F9F9;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 10px;
+}
+
+.container-input button:hover {
+    background-color: #C7CEDB;
+    color: #0C1B33;
+    border-radius: 10px;
+}
+
+.recommendations-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.recommendation-item {
+    text-align: center;
+}
+
+.recommendation-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.recommendation-item h2 {
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .recommendations-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .recommendations-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .recommendations-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .recommendations-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .container-input input, .container-input button {
+        font-size: 0.9rem;
+    }
+}
